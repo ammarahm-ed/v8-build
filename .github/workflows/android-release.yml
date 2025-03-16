@@ -33,7 +33,7 @@ jobs:
             fetch v8
             echo "target_os = ['android']" >> .gclient
             cd v8
-            git checkout 11.1.277
+            git checkout 13.6.81
             gclient sync
             ./build/install-build-deps.sh --android --arm --lib32
             echo "${GITHUB_WORKSPACE}/v8/v8/third_party/depot_tools" >> $GITHUB_PATH
@@ -57,6 +57,7 @@ jobs:
               v8_enable_pointer_compression = false
               v8_enable_pointer_compression_8gb = false
               v8_use_zlib = false
+              v8_monolithic=true 
               default_min_sdk_version = 21
               android_ndk_major_version = 21
               target_os = "android"
@@ -79,6 +80,7 @@ jobs:
               v8_enable_pointer_compression = false
               v8_enable_pointer_compression_8gb = false
               v8_use_zlib = false
+              v8_monolithic=true
               default_min_sdk_version = 21
               android_ndk_major_version = 21
               target_os = "android"
@@ -101,6 +103,7 @@ jobs:
               v8_enable_pointer_compression = false
               v8_enable_pointer_compression_8gb = false
               v8_use_zlib = false
+              v8_monolithic=true
               default_min_sdk_version = 21
               android_ndk_major_version = 21
               target_os = "android"
@@ -123,6 +126,7 @@ jobs:
               v8_enable_pointer_compression = false
               v8_enable_pointer_compression_8gb = false
               v8_use_zlib = false
+              v8_monolithic=true
               default_min_sdk_version = 21
               android_ndk_major_version = 21
               target_os = "android"
