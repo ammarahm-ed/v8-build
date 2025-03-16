@@ -59,7 +59,7 @@ jobs:
               android_ndk_major_version = 21
               target_os = "android"
               target_cpu = "arm64"
-              is_component_build = true
+              is_component_build = false
               use_custom_libcxx = false
               libcxx_is_shared = false
               is_debug = false
@@ -82,7 +82,7 @@ jobs:
               android_ndk_major_version = 21
               target_os = "android"
               target_cpu = "arm"
-              is_component_build = true
+              is_component_build = false
               use_custom_libcxx = false
               libcxx_is_shared = false
               is_debug = false
@@ -105,7 +105,7 @@ jobs:
               android_ndk_major_version = 21
               target_os = "android"
               target_cpu = "x86"
-              is_component_build = true
+              is_component_build = false
               use_custom_libcxx = false
               libcxx_is_shared = false
               is_debug = false
@@ -128,7 +128,7 @@ jobs:
               android_ndk_major_version = 21
               target_os = "android"
               target_cpu = "x64"
-              is_component_build = true
+              is_component_build = false
               use_custom_libcxx = false
               libcxx_is_shared = false
               is_debug = false
