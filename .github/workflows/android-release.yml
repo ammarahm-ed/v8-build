@@ -16,6 +16,11 @@ jobs:
         with:
           python-version: "3.9"
 
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          create-symlink: true
+
       - name: prepare cipd
         run: |
             mkdir -p ${GITHUB_WORKSPACE}/v8
@@ -23,6 +28,7 @@ jobs:
             git clone https://chromium.googlesource.com/chromium/tools/depot_tools
             export PATH=$PATH:${GITHUB_WORKSPACE}/v8/depot_tools
             echo "${GITHUB_WORKSPACE}/v8/depot_tools" >> $GITHUB_PATH
+            export CCACHE_CPP2=yes
   
       - name: download v8
         run: |
