@@ -135,21 +135,19 @@ jobs:
       #         symbol_level = 0'
       #       ninja -C out/x64 -j4 v8
   
-      - name: Get all v8 android libs
-        run: |
-            mkdir -p Android/v8so/libs/arm64-v8a
-            mkdir -p Android/v8so/libs/armeabi-v7a
-            mkdir -p Android/v8so/libs/x86
-            mkdir -p Android/v8so/libs/x86_64
-            cp ${GITHUB_WORKSPACE}/v8/v8/out/arm64/lib*.so Android/v8so/libs/arm64-v8a/
-
-      
-            # cp ${GITHUB_WORKSPACE}/v8/v8/out/arm32/lib*.so Android/v8so/libs/armeabi-v7a/
-            # cp ${GITHUB_WORKSPACE}/v8/v8/out/x86/lib*.so Android/v8so/libs/x86/
-            # cp ${GITHUB_WORKSPACE}/v8/v8/out/x64/lib*.so Android/v8so/libs/x86_64/
+      # - name: Get all v8 android libs
+      #   run: |
+      #       mkdir -p Android/v8so/libs/arm64-v8a
+      #       mkdir -p Android/v8so/libs/armeabi-v7a
+      #       mkdir -p Android/v8so/libs/x86
+      #       mkdir -p Android/v8so/libs/
+      #       cp ${GITHUB_WORKSPACE}/v8/v8/out/arm64/lib*.so Android/v8so/libs/arm64-v8a/
+      #       cp ${GITHUB_WORKSPACE}/v8/v8/out/arm32/lib*.so Android/v8so/libs/armeabi-v7a/
+      #       cp ${GITHUB_WORKSPACE}/v8/v8/out/x86/lib*.so Android/v8so/libs/x86/
+      #       cp ${GITHUB_WORKSPACE}/v8/v8/out/x64/lib*.so Android/v8so/libs/x86_64/
 
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: v8_monolithic
-          path: Android
+          path: ${GITHUB_WORKSPACE}/v8/v8/out
