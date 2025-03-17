@@ -155,4 +155,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: v8_monolithic
-          path: ${GITHUB_WORKSPACE}/v8/v8/out
+          path: |
+            ${GITHUB_WORKSPACE}/v8/v8/out
