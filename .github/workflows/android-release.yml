@@ -72,7 +72,7 @@ jobs:
               libcxx_is_shared = false
               is_debug = false
               symbol_level = 0'
-            ninja -C out/arm64 -j4 v8
+            ninja -C out/arm64 -j4 v8_monolith
 
       # - name: build v8 arm32
       #   run: |
