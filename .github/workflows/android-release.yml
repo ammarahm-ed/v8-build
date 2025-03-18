@@ -70,7 +70,12 @@ jobs:
               is_component_build = false
               use_custom_libcxx = false
               libcxx_is_shared = false
+              icu_use_data_file=false
+              v8_enable_v8_checks=false
+              v8_enable_debugging_features=false
               is_debug = false
+              use_thin_lto=false 
+              use_sysroot=false
               symbol_level = 0'
             ninja -C out/arm64 -j4 v8_monolith
 
