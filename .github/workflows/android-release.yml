@@ -63,6 +63,7 @@ jobs:
               v8_monolithic=true
               v8_static_library=true
               v8_enable_webassembly=true
+              v8_enable_pointer_compression=true
               default_min_sdk_version = 21
               android_ndk_major_version = 21
               target_os = "android"
