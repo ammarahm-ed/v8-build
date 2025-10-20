@@ -49,68 +49,69 @@ jobs:
             # cp ./third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.5/lib/linux/i386/libunwind.a ./third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/i686-linux-android/
             # cp ./third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.5/lib/linux/x86_64/libunwind.a ./third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/
             
-      - name: build v8 arm64
-        run: |
-            cd ${GITHUB_WORKSPACE}/v8/v8
-            gn gen out/arm64 --args='
-              v8_enable_i18n_support = false
-              v8_use_external_startup_data = false
-              v8_monolithic=true
-              v8_static_library=true
-              v8_enable_webassembly=true
-              default_min_sdk_version = 21
-              android_ndk_major_version = 21
-              target_os = "android"
-              target_cpu = "arm64"
-              is_component_build = false
-              use_custom_libcxx = false
-              libcxx_is_shared = false
-              icu_use_data_file=false
-              treat_warnings_as_errors=false
-              v8_enable_v8_checks=false
-              v8_enable_debugging_features=false
-              is_debug = false
-              use_thin_lto=false 
-              use_sysroot=false
-              symbol_level = 0'
-              is_official_build=true
-            ninja -C out/arm64 -j4 v8_monolith
+      # - name: build v8 arm64
+      #   run: |
+      #       cd ${GITHUB_WORKSPACE}/v8/v8
+      #       gn gen out/arm64 --args='
+      #         v8_enable_i18n_support = false
+      #         v8_use_external_startup_data = false
+      #         v8_monolithic=true
+      #         v8_static_library=true
+      #         v8_enable_webassembly=true
+      #         default_min_sdk_version = 21
+      #         android_ndk_major_version = 21
+      #         target_os = "android"
+      #         target_cpu = "arm64"
+      #         is_component_build = false
+      #         use_custom_libcxx = false
+      #         libcxx_is_shared = false
+      #         icu_use_data_file=false
+      #         treat_warnings_as_errors=false
+      #         v8_enable_v8_checks=false
+      #         v8_enable_debugging_features=false
+      #         is_debug = false
+      #         use_thin_lto=false 
+      #         use_sysroot=false
+      #         symbol_level = 0'
+      #         is_official_build=true
+      #       ninja -C out/arm64 -j4 v8_monolith
 
       # - name: build v8 arm32
       #   run: |
       #       cd ${GITHUB_WORKSPACE}/v8/v8
       #       gn gen out/arm32 --args='
-      #         v8_use_libm_trig_functions = false
       #         v8_enable_i18n_support = false
       #         v8_use_external_startup_data = false
-      #         v8_enable_snapshot_compression = false
-      #         v8_enable_pointer_compression = false
-      #         v8_enable_pointer_compression_8gb = false
-      #         v8_use_zlib = false
       #         v8_monolithic=true
+      #         v8_static_library=true
+      #         v8_enable_webassembly=true
       #         default_min_sdk_version = 21
       #         android_ndk_major_version = 21
       #         target_os = "android"
-      #         target_cpu = "arm"
+      #         target_cpu = "arm32"
       #         is_component_build = false
       #         use_custom_libcxx = false
       #         libcxx_is_shared = false
+      #         icu_use_data_file=false
+      #         treat_warnings_as_errors=false
+      #         v8_enable_v8_checks=false
+      #         v8_enable_debugging_features=false
       #         is_debug = false
+      #         use_thin_lto=false 
+      #         use_sysroot=false
       #         symbol_level = 0'
-      #       ninja -C out/arm32 -j4 v8
+      #         is_official_build=true
+      #       ninja -C out/arm32 -j4 v8_monolith
   
       # - name: build v8 x86
       #   run: |
       #       cd ${GITHUB_WORKSPACE}/v8/v8
       #       gn gen out/x86 --args='
-      #         v8_use_libm_trig_functions = false
       #         v8_enable_i18n_support = false
       #         v8_use_external_startup_data = false
-      #         v8_enable_snapshot_compression = false
-      #         v8_enable_pointer_compression = false
-      #         v8_enable_pointer_compression_8gb = false
-      #         v8_use_zlib = false
       #         v8_monolithic=true
+      #         v8_static_library=true
+      #         v8_enable_webassembly=true
       #         default_min_sdk_version = 21
       #         android_ndk_major_version = 21
       #         target_os = "android"
@@ -118,22 +119,26 @@ jobs:
       #         is_component_build = false
       #         use_custom_libcxx = false
       #         libcxx_is_shared = false
+      #         icu_use_data_file=false
+      #         treat_warnings_as_errors=false
+      #         v8_enable_v8_checks=false
+      #         v8_enable_debugging_features=false
       #         is_debug = false
+      #         use_thin_lto=false 
+      #         use_sysroot=false
       #         symbol_level = 0'
-      #       ninja -C out/x86 -j4 v8
+      #         is_official_build=true
+      #       ninja -C out/x86 -j4 v8_monolith
 
       # - name: build v8 x64
       #   run: |
       #       cd ${GITHUB_WORKSPACE}/v8/v8
       #       gn gen out/x64 --args='
-      #         v8_use_libm_trig_functions = false
       #         v8_enable_i18n_support = false
       #         v8_use_external_startup_data = false
-      #         v8_enable_snapshot_compression = false
-      #         v8_enable_pointer_compression = false
-      #         v8_enable_pointer_compression_8gb = false
-      #         v8_use_zlib = false
       #         v8_monolithic=true
+      #         v8_static_library=true
+      #         v8_enable_webassembly=true
       #         default_min_sdk_version = 21
       #         android_ndk_major_version = 21
       #         target_os = "android"
@@ -141,23 +146,60 @@ jobs:
       #         is_component_build = false
       #         use_custom_libcxx = false
       #         libcxx_is_shared = false
+      #         icu_use_data_file=false
+      #         treat_warnings_as_errors=false
+      #         v8_enable_v8_checks=false
+      #         v8_enable_debugging_features=false
       #         is_debug = false
+      #         use_thin_lto=false 
+      #         use_sysroot=false
       #         symbol_level = 0'
-      #       ninja -C out/x64 -j4 v8
-  
-      # - name: Get all v8 android libs
-      #   run: |
-      #       mkdir -p Android/v8so/libs/arm64-v8a
-      #       mkdir -p Android/v8so/libs/armeabi-v7a
-      #       mkdir -p Android/v8so/libs/x86
-      #       mkdir -p Android/v8so/libs/
-      #       cp ${GITHUB_WORKSPACE}/v8/v8/out/arm64/lib*.so Android/v8so/libs/arm64-v8a/
-      #       cp ${GITHUB_WORKSPACE}/v8/v8/out/arm32/lib*.so Android/v8so/libs/armeabi-v7a/
-      #       cp ${GITHUB_WORKSPACE}/v8/v8/out/x86/lib*.so Android/v8so/libs/x86/
-      #       cp ${GITHUB_WORKSPACE}/v8/v8/out/x64/lib*.so Android/v8so/libs/x86_64/
+      #         is_official_build=true
+      #       ninja -C out/x64 -j4 v8_monolith
 
-      - name: Upload
+      # - name: Upload
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: v8_monolithic
+      #     path: |
+      #       /home/runner/work/v8-build/v8-build/v8/v8/out
+
+      - name: Prepare directory structure
+        run: |
+          mkdir -p include/v8_inspector/src/inspector
+          mkdir -p include/v8_inspector/src/base/platform
+          mkdir -p include/v8_inspector/src/debug
+          mkdir -p include/v8_inspector/src/common
+          mkdir -p include/v8_inspector/third_party/inspector_protocol/crdtp
+          mkdir -p include/v8_inspector/include
+
+      - name: Copy required V8 headers
+        run: |
+          BASE=/home/runner/work/v8-build/v8-build/v8/v8
+
+          # inspector
+          cp -r $BASE/src/inspector/*.h include/v8_inspector/src/inspector/ || true
+          cp -r $BASE/src/inspector/inspector_protocol_config.json include/v8_inspector/src/inspector/ || true
+
+          # base
+          cp -r $BASE/src/base/*.h include/v8_inspector/src/base/ || true
+          cp -r $BASE/src/base/platform/*.h include/v8_inspector/src/base/platform/ || true
+
+          # debug
+          cp -r $BASE/src/debug/*.h include/v8_inspector/src/debug/ || true
+
+          # common
+          cp -r $BASE/src/common/*.h include/v8_inspector/src/common/ || true
+
+          # crdtp
+          cp -r $BASE/third_party/inspector_protocol/crdtp/*.h include/v8_inspector/third_party/inspector_protocol/crdtp/ || true
+
+          # include/inspector
+          cp -r $BASE/out.v8.x64/gen/include/inspector include/ || true
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: v8_monolithic
-          path: /home/runner/work/v8-build/v8-build/v8/v8/out
+          name: v8_inspector_headers
+          path: include/v8_inspector
+            
