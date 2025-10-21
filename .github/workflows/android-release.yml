@@ -104,7 +104,7 @@ jobs:
               default_min_sdk_version = 21
               android_ndk_major_version = 21
               target_os = "android"
-              target_cpu = "arm32"
+              target_cpu = "arm"
               is_component_build = false
               use_custom_libcxx = false
               libcxx_is_shared = false
