@@ -1,8 +1,8 @@
 diff --git a/BUILD.gn b/BUILD.gn
-index 3a51ee81fad..3be3908adb1 100644
+index 1e3f0181dfb..9d1583f5ac8 100644
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -1142,6 +1142,17 @@ config("cppgc_header_features") {
+@@ -1154,6 +1154,16 @@ config("cppgc_header_features") {
    }
  }
  
@@ -16,11 +16,10 @@ index 3a51ee81fad..3be3908adb1 100644
 +  }
 +}
 +
-+
  enabled_external_defines =
      enabled_external_v8_defines + enabled_external_cppgc_defines
  disabled_external_defines =
-@@ -6689,7 +6700,7 @@ v8_source_set("torque_ls_base") {
+@@ -6477,7 +6487,7 @@ v8_source_set("torque_ls_base") {
    ]
  }
  
@@ -29,7 +28,7 @@ index 3a51ee81fad..3be3908adb1 100644
    sources = [
      "src/base/abort-mode.cc",
      "src/base/abort-mode.h",
-@@ -7035,7 +7046,7 @@ if (v8_use_libm_trig_functions) {
+@@ -6809,7 +6819,7 @@ if (v8_use_libm_trig_functions) {
    }
  }
  
@@ -38,28 +37,11 @@ index 3a51ee81fad..3be3908adb1 100644
    sources = [
      "include/libplatform/libplatform-export.h",
      "include/libplatform/libplatform.h",
-@@ -7870,11 +7881,15 @@ if (is_component_build) {
-       ":v8_snapshot",
-     ]
- 
--    configs = [ ":internal_config" ]
-+    configs = [
-+      ":internal_config",
-+      ":android15_16kb_support",
-+    ]
-     v8_add_configs += [ "//build/config/compiler:thinlto_optimize_max" ]
-     v8_remove_configs += [ "//build/config/compiler:thinlto_optimize_default" ]
- 
-     public_configs = [ ":external_config" ]
-+    output_name = "v8_libfull"
-   }
- 
-   v8_component("v8_for_testing") {
 diff --git a/src/base/build_config.h b/src/base/build_config.h
-index ee745539dfd..76e9f9811e1 100644
+index 207f46b057d..48436737083 100644
 --- a/src/base/build_config.h
 +++ b/src/base/build_config.h
-@@ -100,8 +100,8 @@ constexpr int kMinimumOSPageSize = 16 * 1024;
+@@ -96,8 +96,8 @@ constexpr int kMinimumOSPageSize = 16 * 1024;
  // pages.
  constexpr int kMinimumOSPageSize = 64 * 1024;
  #else
