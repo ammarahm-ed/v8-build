@@ -79,7 +79,7 @@ jobs:
               v8_enable_snapshot_compression = false
               v8_enable_pointer_compression = false
               v8_enable_pointer_compression_8gb = false
-              default_min_sdk_version = 23
+              default_min_sdk_version = 21
               android_ndk_major_version = 21
               target_os = "android"
               target_cpu = "arm64"
