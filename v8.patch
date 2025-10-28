@@ -1,8 +1,26 @@
 diff --git a/BUILD.gn b/BUILD.gn
-index b34e3f405fa..c7a7c2ef64e 100644
+index 3a51ee81fad..3be3908adb1 100644
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -6409,7 +6409,7 @@ v8_source_set("torque_ls_base") {
+@@ -1142,6 +1142,17 @@ config("cppgc_header_features") {
+   }
+ }
+ 
++config("android15_16kb_support") {
++  ldflags = []
++  if (v8_current_cpu == "x64" || v8_current_cpu == "arm64") {
++    ldflags += [
++      "-Wl,-z,max-page-size=16384",
++      "-Wl,-z,common-page-size=16384",
++    ]
++  }
++}
++
++
+ enabled_external_defines =
+     enabled_external_v8_defines + enabled_external_cppgc_defines
+ disabled_external_defines =
+@@ -6689,7 +6700,7 @@ v8_source_set("torque_ls_base") {
    ]
  }
  
@@ -11,7 +29,7 @@ index b34e3f405fa..c7a7c2ef64e 100644
    sources = [
      "src/base/abort-mode.cc",
      "src/base/abort-mode.h",
-@@ -6725,7 +6725,7 @@ if (v8_use_libm_trig_functions) {
+@@ -7035,7 +7046,7 @@ if (v8_use_libm_trig_functions) {
    }
  }
  
@@ -20,11 +38,35 @@ index b34e3f405fa..c7a7c2ef64e 100644
    sources = [
      "include/libplatform/libplatform-export.h",
      "include/libplatform/libplatform.h",
-@@ -7544,6 +7544,7 @@ if (is_component_build) {
-     configs = [ ":internal_config" ]
+@@ -7870,11 +7881,15 @@ if (is_component_build) {
+       ":v8_snapshot",
+     ]
+ 
+-    configs = [ ":internal_config" ]
++    configs = [
++      ":internal_config",
++      ":android15_16kb_support",
++    ]
+     v8_add_configs += [ "//build/config/compiler:thinlto_optimize_max" ]
+     v8_remove_configs += [ "//build/config/compiler:thinlto_optimize_default" ]
  
      public_configs = [ ":external_config" ]
 +    output_name = "v8_libfull"
    }
  
    v8_component("v8_for_testing") {
+diff --git a/src/base/build_config.h b/src/base/build_config.h
+index ee745539dfd..76e9f9811e1 100644
+--- a/src/base/build_config.h
++++ b/src/base/build_config.h
+@@ -100,8 +100,8 @@ constexpr int kMinimumOSPageSize = 16 * 1024;
+ // pages.
+ constexpr int kMinimumOSPageSize = 64 * 1024;
+ #else
+-// Everything else uses 4kB pages.
+-constexpr int kMinimumOSPageSize = 4 * 1024;
++// Everything else uses 16kB pages.
++constexpr int kMinimumOSPageSize = 16 * 1024;
+ #endif
+ 
+ #endif  // V8_BASE_BUILD_CONFIG_H_
