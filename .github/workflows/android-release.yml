@@ -165,3 +165,49 @@ jobs:
         with:
           name: v8_monolithic
           path: /home/runner/work/v8-build/v8-build/v8/v8/out
+
+      - name: Prepare directory structure
+        run: |
+          mkdir -p include/v8_inspector/src/inspector
+          mkdir -p include/v8_inspector/src/base/platform
+          mkdir -p include/v8_inspector/src/base/numbers
+          mkdir -p include/v8_inspector/src/base/debug
+          mkdir -p include/v8_inspector/src/base/sanitizer
+          mkdir -p include/v8_inspector/src/debug
+          mkdir -p include/v8_inspector/src/common
+          mkdir -p include/third_party/inspector_protocol/crdtp
+          mkdir -p include/v8_inspector/include
+
+      - name: Copy required V8 headers
+        run: |
+          BASE=/home/runner/work/v8-build/v8-build/v8/v8
+
+          # inspector
+          cp -r $BASE/out/x64/gen/src/inspector/protocol/* include/v8_inspector/src/inspector/ || true
+          cp -r $BASE/src/inspector/*.h include/v8_inspector/src/inspector/ || true
+          cp -r $BASE/src/inspector/inspector_protocol_config.json include/v8_inspector/src/inspector/ || true
+
+          # base
+          cp -r $BASE/src/base/*.h include/v8_inspector/src/base/ || true
+          cp -r $BASE/src/base/platform/*.h include/v8_inspector/src/base/platform/ || true
+          cp -r $BASE/src/base/numbers/*.h include/v8_inspector/src/base/numbers/ || true
+          cp -r $BASE/src/base/sanitizer/*.h include/v8_inspector/src/base/sanitizer/ || true
+          cp -r $BASE/src/base/debug/*.h include/v8_inspector/src/base/debug/ || true
+
+          # debug
+          cp -r $BASE/src/debug/*.h include/v8_inspector/src/debug/ || true
+
+          # common
+          cp -r $BASE/src/common/*.h include/v8_inspector/src/common/ || true
+
+          # crdtp
+          cp -r $BASE/third_party/inspector_protocol/crdtp/*.h include/third_party/inspector_protocol/crdtp/ || true
+
+          # include/inspector
+          cp -r $BASE/out.v8.x64/gen/include/inspector include/ || true
+
+      - name: Upload headers
+        uses: actions/upload-artifact@v4
+        with:
+          name: v8_inspector_headers
+          path: include/v8_inspector
