@@ -36,7 +36,7 @@ jobs:
             fetch v8
             echo "target_os = ['android']" >> .gclient
             cd v8
-            git checkout 13.6.81
+            git checkout 14.4.7
             gclient sync
             ./build/install-build-deps.sh --android --arm --lib32
             echo "${GITHUB_WORKSPACE}/v8/v8/third_party/depot_tools" >> $GITHUB_PATH
@@ -53,16 +53,15 @@ jobs:
         run: |
             cd ${GITHUB_WORKSPACE}/v8/v8
             gn gen out/arm64 --args='
-              v8_use_libm_trig_functions = false
               v8_enable_i18n_support = false
               v8_use_external_startup_data = false
-              v8_enable_snapshot_compression = false
-              v8_enable_pointer_compression = false
-              v8_enable_pointer_compression_8gb = false
-              v8_use_zlib = false
               v8_monolithic=true
               v8_static_library=true
               v8_enable_webassembly=true
+              v8_use_libm_trig_functions = false
+              v8_enable_snapshot_compression = false
+              v8_enable_pointer_compression = false
+              v8_enable_pointer_compression_8gb = false
               default_min_sdk_version = 21
               android_ndk_major_version = 21
               target_os = "android"
@@ -71,12 +70,14 @@ jobs:
               use_custom_libcxx = false
               libcxx_is_shared = false
               icu_use_data_file=false
+              treat_warnings_as_errors=false
               v8_enable_v8_checks=false
               v8_enable_debugging_features=false
               is_debug = false
               use_thin_lto=false 
               use_sysroot=false
               symbol_level = 0'
+              is_official_build=true
             ninja -C out/arm64 -j4 v8_monolith
 
       # - name: build v8 arm32
