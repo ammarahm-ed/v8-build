@@ -52,7 +52,7 @@ jobs:
             fetch v8
             echo "target_os = ['android']" >> .gclient
             cd v8
-            git checkout 14.4.7
+            git checkout 13.8.9
             gclient sync
             ./build/install-build-deps.sh --android --arm --lib32
             echo "${GITHUB_WORKSPACE}/v8/v8/third_party/depot_tools" >> $GITHUB_PATH
