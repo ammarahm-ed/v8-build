@@ -73,6 +73,7 @@ jobs:
               v8_enable_i18n_support = false
               v8_use_external_startup_data = false
               v8_monolithic=true
+              enable_rust=false
               v8_static_library=true
               v8_enable_webassembly=true
               v8_use_libm_trig_functions = false
