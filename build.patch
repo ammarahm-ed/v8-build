@@ -1,8 +1,8 @@
 diff --git a/config/android/BUILD.gn b/config/android/BUILD.gn
-index db4025262..ea0b603e9 100644
+index 8c77eb2c9..31eb59adb 100644
 --- a/config/android/BUILD.gn
 +++ b/config/android/BUILD.gn
-@@ -84,6 +84,16 @@ config("compiler") {
+@@ -92,6 +92,16 @@ config("compiler") {
  # that is Android-only. Please see that target for advice on what should go in
  # :runtime_library vs. :compiler.
  config("runtime_library") {
@@ -20,30 +20,22 @@ index db4025262..ea0b603e9 100644
  
  config("hide_all_but_jni_onload") {
 diff --git a/config/compiler/BUILD.gn b/config/compiler/BUILD.gn
-index 217ea9804..b609a3a58 100644
+index e579cc9a9..53ddc7885 100644
 --- a/config/compiler/BUILD.gn
 +++ b/config/compiler/BUILD.gn
-@@ -27,6 +27,7 @@ import("//build_overrides/build.gni")
- if (current_cpu == "arm" || current_cpu == "arm64") {
-   import("//build/config/arm.gni")
- }
-+
- if (current_cpu == "mipsel" || current_cpu == "mips64el" ||
-     current_cpu == "mips" || current_cpu == "mips64") {
-   import("//build/config/mips.gni")
-@@ -1318,6 +1319,7 @@ config("compiler_cpu_abi") {
-         "-msse3",
-       ]
+@@ -1227,6 +1227,7 @@ config("compiler_cpu_abi") {
+         ]
+       }
      } else if (current_cpu == "arm") {
 +      ldflags += [ "-Wl,--hash-style=sysv" ]
-       if (is_clang && !is_android && !is_chromeos_device) {
+       if (is_clang && !is_android && !is_nacl && !is_chromeos_device) {
          cflags += [ "--target=arm-linux-gnueabihf" ]
          ldflags += [ "--target=arm-linux-gnueabihf" ]
-@@ -1330,6 +1332,7 @@ config("compiler_cpu_abi") {
+@@ -1241,6 +1242,7 @@ config("compiler_cpu_abi") {
          cflags += [ "-mtune=$arm_tune" ]
        }
      } else if (current_cpu == "arm64") {
 +      ldflags += [ "-Wl,--hash-style=sysv" ]
-       if (is_clang && !is_android && !is_fuchsia && !is_chromeos_device) {
+       if (is_clang && !is_android && !is_nacl && !is_fuchsia &&
+           !is_chromeos_device) {
          cflags += [ "--target=aarch64-linux-gnu" ]
-         ldflags += [ "--target=aarch64-linux-gnu" ]

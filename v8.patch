@@ -52,3 +52,26 @@ index 207f46b057d..48436737083 100644
  #endif
  
  #endif  // V8_BASE_BUILD_CONFIG_H_
+diff --git a/src/builtins/builtins-typed-array.cc b/src/builtins/builtins-typed-array.cc
+index b2cd7e53315..4d8b1983aae 100644
+--- a/src/builtins/builtins-typed-array.cc
++++ b/src/builtins/builtins-typed-array.cc
+@@ -820,9 +820,15 @@ BUILTIN(Uint8ArrayPrototypeToBase64) {
+ 
+     size_t simd_result_size;
+     if (uint8array->buffer()->is_shared()) {
+-      simd_result_size = simdutf::atomic_binary_to_base64(
+-          std::bit_cast<const char*>(uint8array->GetBuffer()->backing_store()),
+-          length, reinterpret_cast<char*>(output->GetChars(no_gc)), alphabet);
++      std::unique_ptr<char[]> tmp = std::make_unique<char[]>(length);
++      base::Relaxed_Memmove(
++          reinterpret_cast<base::Atomic8*>(tmp.get()),
++          reinterpret_cast<base::Atomic8*>(const_cast<char*>(
++              std::bit_cast<const char*>(uint8array->GetBuffer()->backing_store()))),
++          length);
++      simd_result_size = simdutf::binary_to_base64(
++          tmp.get(), length,
++          reinterpret_cast<char*>(output->GetChars(no_gc)), alphabet);
+     } else {
+       simd_result_size = simdutf::binary_to_base64(
+           std::bit_cast<const char*>(uint8array->GetBuffer()->backing_store()),
