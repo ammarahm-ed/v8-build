@@ -65,38 +65,38 @@ jobs:
             # cp ./third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.5/lib/linux/i386/libunwind.a ./third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/i686-linux-android/
             # cp ./third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/12.0.5/lib/linux/x86_64/libunwind.a ./third_party/android_ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/x86_64-linux-android/
             
-      - name: build v8 arm64
-        run: |
-            cd ${GITHUB_WORKSPACE}/v8/v8
-            ensure_bootstrap
-            gn gen out/arm64 --args='
-              v8_enable_i18n_support = false
-              v8_use_external_startup_data = false
-              v8_monolithic=true
-              enable_rust=false
-              v8_static_library=true
-              v8_enable_webassembly=true
-              v8_use_libm_trig_functions = false
-              v8_enable_snapshot_compression = false
-              v8_enable_pointer_compression = false
-              v8_enable_pointer_compression_8gb = false
-              default_min_sdk_version = 21
-              android_ndk_major_version = 21
-              target_os = "android"
-              target_cpu = "arm64"
-              is_component_build = false
-              use_custom_libcxx = false
-              libcxx_is_shared = false
-              icu_use_data_file=false
-              treat_warnings_as_errors=false
-              v8_enable_v8_checks=false
-              v8_enable_debugging_features=false
-              is_debug = false
-              use_thin_lto=false 
-              use_sysroot=false
-              symbol_level = 0'
-              is_official_build=true
-            ninja -C out/arm64 -j4 v8_monolith
+      # - name: build v8 arm64
+      #   run: |
+      #       cd ${GITHUB_WORKSPACE}/v8/v8
+      #       ensure_bootstrap
+      #       gn gen out/arm64 --args='
+      #         v8_enable_i18n_support = false
+      #         v8_use_external_startup_data = false
+      #         v8_monolithic=true
+      #         enable_rust=false
+      #         v8_static_library=true
+      #         v8_enable_webassembly=true
+      #         v8_use_libm_trig_functions = false
+      #         v8_enable_snapshot_compression = false
+      #         v8_enable_pointer_compression = false
+      #         v8_enable_pointer_compression_8gb = false
+      #         default_min_sdk_version = 21
+      #         android_ndk_major_version = 21
+      #         target_os = "android"
+      #         target_cpu = "arm64"
+      #         is_component_build = false
+      #         use_custom_libcxx = false
+      #         libcxx_is_shared = false
+      #         icu_use_data_file=false
+      #         treat_warnings_as_errors=false
+      #         v8_enable_v8_checks=false
+      #         v8_enable_debugging_features=false
+      #         is_debug = false
+      #         use_thin_lto=false 
+      #         use_sysroot=false
+      #         symbol_level = 0'
+      #         is_official_build=true
+      #       ninja -C out/arm64 -j4 v8_monolith
 
       - name: build v8 arm32
         run: |
